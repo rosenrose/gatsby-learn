@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { graphql, Link } from "gatsby";
-import { Global, css } from "@emotion/react";
+import { css, SerializedStyles } from "@emotion/react";
 import styled from "@emotion/styled";
 
 type InfoPageProps = {
@@ -27,14 +27,6 @@ export const metadataQuery = graphql`
   }
 `;
 
-const globalStyle = css`
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-`;
-
 const textStyle = css`
   font-size: 1.2rem;
   font-weight: 700;
@@ -48,12 +40,12 @@ interface ITextProp {
 const Text1 = styled.div<ITextProp>`
   font-size: 1.5rem;
   color: seagreen;
-  text-decoration: ${(props) => (props.disabled ? "line-through" : "")};
+  text-decoration: ${({ disabled }) => (disabled ? "line-through" : "")};
 `;
-const Text2 = styled.div<ITextProp>((props) => ({
+const Text2 = styled.div<ITextProp>(({ disabled }) => ({
   fontSize: "1.8rem",
   color: "cyan",
-  textDecoration: props.disabled ? "line-through" : "",
+  textDecoration: disabled ? "line-through" : "",
 }));
 
 const InfoPage: FunctionComponent<InfoPageProps> = ({
@@ -65,7 +57,6 @@ const InfoPage: FunctionComponent<InfoPageProps> = ({
 }) => {
   return (
     <>
-      <Global styles={globalStyle} />
       <p>{description}</p>
       <div css={textStyle}>{siteUrl}</div>
       <Text1>{title}</Text1>
@@ -76,3 +67,9 @@ const InfoPage: FunctionComponent<InfoPageProps> = ({
 };
 
 export default InfoPage;
+
+declare module "react" {
+  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    css?: SerializedStyles;
+  }
+}

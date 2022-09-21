@@ -12,16 +12,17 @@ const config: GatsbyConfig = {
   plugins: [
     "gatsby-plugin-emotion",
     "gatsby-plugin-sitemap",
+    "gatsby-plugin-mdx",
     "gatsby-transformer-remark",
     {
       resolve: "gatsby-source-filesystem",
       options: {
         // name: "pages",
         // path: "./src/pages/",
-        name: "contents",
-        path: `${__dirname}/contents`,
+        name: "posts",
+        path: `${__dirname}/posts`,
       },
-      __key: "pages",
+      __key: "posts",
     },
   ],
 };
