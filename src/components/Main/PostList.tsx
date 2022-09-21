@@ -1,6 +1,6 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import styled from "@emotion/styled";
-import PostItem from "./PostItem";
+import PostItem, { IPost } from "./PostItem";
 
 const PostListWrapper = styled.div`
   display: grid;
@@ -18,22 +18,11 @@ const PostListWrapper = styled.div`
   }
 `;
 
-const POST_ITEM_DATA = {
-  title: "Post Item Title",
-  date: new Date(),
-  categories: ["Web", "Frontend", "Testing"],
-  summary:
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident repellat doloremque fugit quis rem temporibus! Maxime molestias, suntrem debitis odit harum impedit. Modi cupiditate harum dignissimos eos in corrupti!",
-  thumbnail: "https://avatars.githubusercontent.com/u/42435748",
-  link: "https://www.google.co.kr/",
-  postId: "1",
-};
-
-const PostList: FunctionComponent = () => {
+const PostList: FunctionComponent<{ posts: IPost[] }> = ({ posts }) => {
   return (
     <PostListWrapper>
-      {[...Array(4)].map((_, i) => (
-        <PostItem key={i} {...POST_ITEM_DATA} />
+      {posts.map((post) => (
+        <PostItem key={post.node.id} {...post} />
       ))}
     </PostListWrapper>
   );

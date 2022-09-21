@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import styled from "@emotion/styled";
-import ProfileImage from "components/Main/ProfileImage";
+import ProfileImage, { IProfileImageProps } from "components/Main/ProfileImage";
 
 const Background = styled.div`
   width: 100%;
@@ -43,11 +43,11 @@ const Title = styled.h1`
   }
 `;
 
-const Introduction: FunctionComponent = () => {
+const Introduction: FunctionComponent<IProfileImageProps> = ({ profileImage }) => {
   return (
     <Background>
       <Wrapper>
-        <ProfileImage />
+        <ProfileImage profileImage={profileImage} />
         <div>
           <SubTitle>Hello world</SubTitle>
           <Title>Gatsby Blog</Title>

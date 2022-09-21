@@ -11,18 +11,36 @@ const config: GatsbyConfig = {
   graphqlTypegen: true,
   plugins: [
     "gatsby-plugin-emotion",
-    "gatsby-plugin-sitemap",
+    "gatsby-plugin-image",
     "gatsby-plugin-mdx",
-    "gatsby-transformer-remark",
+    "gatsby-plugin-sharp",
+    "gatsby-plugin-sitemap",
     {
       resolve: "gatsby-source-filesystem",
       options: {
-        // name: "pages",
-        // path: "./src/pages/",
         name: "posts",
         path: `${__dirname}/posts`,
       },
       __key: "posts",
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "static",
+        path: `${__dirname}/static`,
+      },
+      __key: "static",
+    },
+    "gatsby-transformer-remark",
+    {
+      resolve: "gatsby-transformer-sharp",
+      options: {
+        defaults: {
+          formats: ["auto", "webp"],
+          quality: 100,
+          placeholder: "blurred",
+        },
+      },
     },
   ],
 };

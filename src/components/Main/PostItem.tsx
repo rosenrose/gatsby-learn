@@ -1,16 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Link } from "gatsby";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import styled from "@emotion/styled";
-
-interface IPostItemProps {
-  title: string;
-  date: Date;
-  categories: string[];
-  summary: string;
-  thumbnail: string;
-  link: string;
-  postId: string;
-}
 
 const PostItemWrapper = styled(Link)`
   display: flex;
@@ -24,11 +15,10 @@ const PostItemWrapper = styled(Link)`
   }
 `;
 
-const ThumbnailImage = styled.img`
+const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
   height: 12.5rem;
   border-radius: 1rem 1rem 0 0;
-  object-fit: cover;
 `;
 
 const PostItemContent = styled.div`
@@ -80,24 +70,47 @@ const Summary = styled(Title)`
   opacity: 0.8;
 `;
 
-const PostItem: FunctionComponent<IPostItemProps> = ({
-  title,
-  date,
-  categories,
-  summary,
-  thumbnail,
-  link,
-  postId,
+export interface IPost {
+  node: {
+    id: string;
+    frontmatter: {
+      categories: string[];
+      date: string;
+      summary: string;
+      title: string;
+      thumbnail: {
+        childImageSharp: {
+          gatsbyImageData: IGatsbyImageData;
+        };
+      };
+    };
+  };
+}
+
+const PostItem: FunctionComponent<IPost> = ({
+  node: {
+    id,
+    frontmatter: {
+      categories,
+      date,
+      summary,
+      title,
+      thumbnail: {
+        childImageSharp: { gatsbyImageData },
+      },
+    },
+  },
 }) => {
+  // console.log(thumbnail);
   return (
-    <PostItemWrapper to={`post/${postId}`}>
-      <ThumbnailImage src={thumbnail} alt="Post Item Image" />
+    <PostItemWrapper to={`post/${id}`}>
+      <ThumbnailImage image={gatsbyImageData} alt="Post Item Image" />
       <PostItemContent>
         <Title>{title}</Title>
-        <Date>{date.toLocaleDateString()}</Date>
+        <Date>{date}</Date>
         <Category>
           {categories.map((category) => (
-            <CategoryItem>{category}</CategoryItem>
+            <CategoryItem key={category}>{category}</CategoryItem>
           ))}
         </Category>
         <Summary>{summary}</Summary>

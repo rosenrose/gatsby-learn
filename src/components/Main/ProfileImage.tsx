@@ -1,8 +1,9 @@
 import React, { FunctionComponent } from "react";
+import { graphql } from "gatsby";
+import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import styled from "@emotion/styled";
 
-const PROFILE_IMAGE_LINK = "https://avatars.githubusercontent.com/u/42435748";
-const ProfileImageWrapper = styled.img`
+const ProfileImageWrapper = styled(GatsbyImage)`
   width: 10rem;
   height: 10rem;
   margin-bottom: 2rem;
@@ -14,8 +15,22 @@ const ProfileImageWrapper = styled.img`
   }
 `;
 
-const ProfileImage: FunctionComponent = () => {
-  return <ProfileImageWrapper src={PROFILE_IMAGE_LINK} alt="Profile Image" />;
+export const getProfileImage = graphql`
+  query getProfileImage {
+    file(name: { eq: "profile_image" }) {
+      childImageSharp {
+        gatsbyImageData(width: 120, height: 120)
+      }
+    }
+  }
+`;
+
+export interface IProfileImageProps {
+  profileImage: IGatsbyImageData;
+}
+
+const ProfileImage: FunctionComponent<IProfileImageProps> = ({ profileImage }) => {
+  return <ProfileImageWrapper image={profileImage} alt="Profile Image" />;
 };
 
 export default ProfileImage;
