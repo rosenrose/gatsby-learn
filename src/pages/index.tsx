@@ -1,19 +1,11 @@
 import React, { FunctionComponent, useMemo } from "react";
 import { graphql } from "gatsby";
 import { IGatsbyImageData } from "gatsby-plugin-image";
-import styled from "@emotion/styled";
-import GlobalStyle from "components/Common/GlobalStyle";
 import Introduction from "components/Main/Introduction";
 import CategoryList from "components/Main/CategoryList";
 import PostList from "components/Main/PostList";
 import { IPost } from "components/Main/PostItem";
-import Footer from "components/Common/Footer";
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
+import Template from "components/Common/Template";
 
 interface IIndexPagePros {
   data: {
@@ -104,13 +96,11 @@ const IndexPage: FunctionComponent<IIndexPagePros> = ({
   );
 
   return (
-    <Container>
-      <GlobalStyle />
+    <Template>
       <Introduction profileImage={gatsbyImageData} />
       <CategoryList selectedCategory={selectedCategory} categoryList={categoryList} />
       <PostList selectedCategory={selectedCategory} posts={edges} />
-      <Footer />
-    </Container>
+    </Template>
   );
 };
 

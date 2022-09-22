@@ -1,5 +1,8 @@
 import React, { FunctionComponent } from "react";
 import { graphql } from "gatsby";
+import Template from "components/Common/Template";
+import PostHead from "components/Post/PostHead";
+import { IPost } from "components/Main/PostItem";
 
 export const queryMarkdownBySlug = graphql`
   query queryMarkdownBySlug($slug: String) {
@@ -24,10 +27,39 @@ export const queryMarkdownBySlug = graphql`
   }
 `;
 
-const PostTemplate: FunctionComponent = (props: any) => {
-  console.log(props);
+interface IPostTemplateProps {
+  data: {
+    allMarkdownRemark: {
+      edges: IPost[];
+    };
+  };
+}
 
-  return <>{props.path}</>;
+const PostTemplate: FunctionComponent<IPostTemplateProps> = ({
+  data: {
+    allMarkdownRemark: { edges },
+  },
+}) => {
+  const {
+    node: {
+      html,
+      frontmatter: {
+        title,
+        summary,
+        date,
+        categories,
+        thumbnail: {
+          childImageSharp: { gatsbyImageData },
+        },
+      },
+    },
+  } = edges[0];
+
+  return (
+    <Template>
+      <PostHead title={title} date={date} categories={categories} thumbnail={gatsbyImageData} />
+    </Template>
+  );
 };
 
 export default PostTemplate;

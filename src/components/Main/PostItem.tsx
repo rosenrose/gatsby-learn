@@ -72,7 +72,8 @@ const Summary = styled(Title)`
 
 export interface IPost {
   node: {
-    id: string;
+    id?: string;
+    html?: string;
     frontmatter: {
       categories: string[];
       date: string;
