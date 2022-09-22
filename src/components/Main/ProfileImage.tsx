@@ -25,7 +25,7 @@ export const getProfileImage = graphql`
   }
 `;
 
-export interface IProfileImageProps {
+interface IProfileImageProps {
   profileImage: IGatsbyImageData;
 }
 

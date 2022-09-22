@@ -84,12 +84,14 @@ export interface IPost {
         };
       };
     };
+    fields: {
+      slug: string;
+    };
   };
 }
 
 const PostItem: FunctionComponent<IPost> = ({
   node: {
-    id,
     frontmatter: {
       categories,
       date,
@@ -99,11 +101,12 @@ const PostItem: FunctionComponent<IPost> = ({
         childImageSharp: { gatsbyImageData },
       },
     },
+    fields: { slug },
   },
 }) => {
   // console.log(thumbnail);
   return (
-    <PostItemWrapper to={`post/${id}`}>
+    <PostItemWrapper to={slug}>
       <ThumbnailImage image={gatsbyImageData} alt="Post Item Image" />
       <PostItemContent>
         <Title>{title}</Title>

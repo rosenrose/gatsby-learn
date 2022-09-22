@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useMemo } from "react";
 import { graphql } from "gatsby";
 import { IGatsbyImageData } from "gatsby-plugin-image";
 import styled from "@emotion/styled";
@@ -15,12 +15,6 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const CATEGORY_LIST = {
-  All: 5,
-  Web: 3,
-  Mobile: 2,
-};
-
 interface IIndexPagePros {
   data: {
     allMarkdownRemark: {
@@ -31,6 +25,9 @@ interface IIndexPagePros {
         gatsbyImageData: IGatsbyImageData;
       };
     };
+  };
+  location: {
+    search: string;
   };
 }
 
@@ -51,6 +48,9 @@ export const getPostList = graphql`
               }
             }
           }
+          fields {
+            slug
+          }
         }
       }
     }
@@ -62,6 +62,8 @@ export const getPostList = graphql`
   }
 `;
 
+export const CATEGORY_ALL = "All";
+
 const IndexPage: FunctionComponent<IIndexPagePros> = ({
   data: {
     allMarkdownRemark: { edges },
@@ -69,13 +71,44 @@ const IndexPage: FunctionComponent<IIndexPagePros> = ({
       childImageSharp: { gatsbyImageData },
     },
   },
+  location: { search },
 }) => {
+  const params = new URLSearchParams(search);
+  const selectedCategory = params.get("category") || CATEGORY_ALL;
+
+  const categoryList = useMemo(
+    () =>
+      edges.reduce(
+        (
+          catList,
+          {
+            node: {
+              frontmatter: { categories },
+            },
+          }
+        ) => {
+          categories.forEach((category) => {
+            if (!(category in catList)) {
+              catList[category] = 0;
+            }
+            catList[category] += 1;
+          });
+
+          catList[CATEGORY_ALL] += 1;
+
+          return catList;
+        },
+        { [CATEGORY_ALL]: 0 } as { [k: string]: number }
+      ),
+    []
+  );
+
   return (
     <Container>
       <GlobalStyle />
       <Introduction profileImage={gatsbyImageData} />
-      <CategoryList selecedCategory="Web" categoryList={CATEGORY_LIST} />
-      <PostList posts={edges} />
+      <CategoryList selectedCategory={selectedCategory} categoryList={categoryList} />
+      <PostList selectedCategory={selectedCategory} posts={edges} />
       <Footer />
     </Container>
   );

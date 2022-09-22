@@ -2,8 +2,8 @@ import React, { FunctionComponent, ReactNode } from "react";
 import { Link } from "gatsby";
 import styled from "@emotion/styled";
 
-export interface ICategoryListProps {
-  selecedCategory: string;
+interface ICategoryListProps {
+  selectedCategory: string;
   categoryList: {
     [k: string]: number;
   };
@@ -40,14 +40,17 @@ const CategoryItem = styled(({ active, ...props }: ICategoryItemProps) => <Link 
   }
 `;
 
-const CategoryList: FunctionComponent<ICategoryListProps> = ({ selecedCategory, categoryList }) => {
+const CategoryList: FunctionComponent<ICategoryListProps> = ({
+  selectedCategory,
+  categoryList,
+}) => {
   return (
     <CategoryListWrapper>
       {Object.entries(categoryList).map(([category, count]) => (
         <CategoryItem
           key={category}
           to={`/?category=${category}`}
-          active={category === selecedCategory}
+          active={category.toLowerCase() === selectedCategory.toLowerCase()}
         >
           #{category}({count})
         </CategoryItem>
