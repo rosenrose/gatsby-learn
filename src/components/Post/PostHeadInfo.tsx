@@ -35,6 +35,7 @@ const PrevIcon = styled.div`
   color: #000;
   font-size: 1.3rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
 
   @media (max-width: 768px) {
     width: 2rem;
