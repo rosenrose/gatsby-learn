@@ -1,11 +1,13 @@
 import React, { FunctionComponent, useMemo } from "react";
 import { graphql } from "gatsby";
+import { SerializedStyles } from "@emotion/react";
 import { IGatsbyImageData } from "gatsby-plugin-image";
 import Introduction from "components/Main/Introduction";
 import CategoryList from "components/Main/CategoryList";
 import PostList from "components/Main/PostList";
 import { IPost } from "components/Main/PostItem";
 import Template from "components/Common/Template";
+import { CATEGORY_ALL } from "utils/variables";
 
 interface IIndexPagePros {
   data: {
@@ -54,8 +56,6 @@ export const getPostList = graphql`
   }
 `;
 
-export const CATEGORY_ALL = "All";
-
 const IndexPage: FunctionComponent<IIndexPagePros> = ({
   data: {
     allMarkdownRemark: { edges },
@@ -65,9 +65,6 @@ const IndexPage: FunctionComponent<IIndexPagePros> = ({
   },
   location: { search },
 }) => {
-  const params = new URLSearchParams(search);
-  const selectedCategory = params.get("category") || CATEGORY_ALL;
-
   const categoryList = useMemo(
     () =>
       edges.reduce(
@@ -95,6 +92,13 @@ const IndexPage: FunctionComponent<IIndexPagePros> = ({
     []
   );
 
+  const params = new URLSearchParams(search);
+  let selectedCategory = params.get("category") || CATEGORY_ALL;
+
+  if (!(selectedCategory in categoryList)) {
+    selectedCategory = CATEGORY_ALL;
+  }
+
   return (
     <Template>
       <Introduction profileImage={gatsbyImageData} />
@@ -105,3 +109,12 @@ const IndexPage: FunctionComponent<IIndexPagePros> = ({
 };
 
 export default IndexPage;
+
+declare module "react" {
+  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+    css?: SerializedStyles;
+    repo?: string;
+    label?: string;
+    theme?: string;
+  }
+}

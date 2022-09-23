@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react";
 import styled from "@emotion/styled";
 import ProfileImage, { IProfileImageProps } from "components/Main/ProfileImage";
+import { MAIN_WIDTH } from "utils/variables";
+import { HEADER_HEIGHT } from "utils/variables";
 
 const Background = styled.div`
   width: 100%;
@@ -13,8 +15,8 @@ const Wrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  width: 48rem;
-  height: 25rem;
+  width: ${MAIN_WIDTH};
+  height: ${HEADER_HEIGHT};
   margin: 0 auto;
 
   @media (max-width: 768px) {

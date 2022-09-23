@@ -2,15 +2,16 @@ import React, { FunctionComponent, useMemo } from "react";
 import styled from "@emotion/styled";
 import PostItem, { IPost } from "./PostItem";
 import useInfiniteScroll from "hooks/useInfiniteScroll";
+import { MAIN_WIDTH } from "utils/variables";
 
 const PostListWrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 1.2rem;
-  width: 48rem;
+  width: ${MAIN_WIDTH};
   margin: 0 auto;
   padding: 3rem 0 6rem;
-  background-color: purple;
+  background-color: #7bb3c2;
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
@@ -26,12 +27,12 @@ export interface IPostListProps {
 
 const PostList: FunctionComponent<IPostListProps> = ({ posts, selectedCategory }) => {
   const { containerRef, postList } = useInfiniteScroll({ posts, selectedCategory });
-  console.log(containerRef);
+  // console.log(containerRef);
 
   return (
     <PostListWrapper ref={containerRef}>
-      {postList.map((post) => (
-        <PostItem key={post.node.id} {...post} />
+      {postList.map(({ node: { id, frontmatter, fields } }) => (
+        <PostItem key={id} {...frontmatter} {...fields} />
       ))}
     </PostListWrapper>
   );

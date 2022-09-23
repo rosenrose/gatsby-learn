@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { graphql, Link } from "gatsby";
-import { css, SerializedStyles } from "@emotion/react";
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 type InfoPageProps = {
@@ -67,9 +67,3 @@ const InfoPage: FunctionComponent<InfoPageProps> = ({
 };
 
 export default InfoPage;
-
-declare module "react" {
-  interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
-    css?: SerializedStyles;
-  }
-}

@@ -36,7 +36,6 @@ const Title = styled.h3`
   white-space: normal;
   overflow-wrap: break-word;
   -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
   font-size: 1.2rem;
   font-weight: 700;
 `;
@@ -74,36 +73,36 @@ export interface IPost {
   node: {
     id?: string;
     html?: string;
-    frontmatter: {
-      categories: string[];
-      date: string;
-      summary: string;
-      title: string;
-      thumbnail: {
-        childImageSharp: {
-          gatsbyImageData: IGatsbyImageData;
-        };
-      };
-    };
-    fields: {
-      slug: string;
+    frontmatter: IFrontmatter;
+    fields: IFields;
+  };
+}
+
+export interface IFrontmatter {
+  categories: string[];
+  date: string;
+  summary: string;
+  title: string;
+  thumbnail: {
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData;
     };
   };
 }
 
-const PostItem: FunctionComponent<IPost> = ({
-  node: {
-    frontmatter: {
-      categories,
-      date,
-      summary,
-      title,
-      thumbnail: {
-        childImageSharp: { gatsbyImageData },
-      },
-    },
-    fields: { slug },
+interface IFields {
+  slug: string;
+}
+
+const PostItem: FunctionComponent<IFrontmatter & IFields> = ({
+  categories,
+  date,
+  summary,
+  title,
+  thumbnail: {
+    childImageSharp: { gatsbyImageData },
   },
+  slug,
 }) => {
   // console.log(thumbnail);
   return (

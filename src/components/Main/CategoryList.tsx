@@ -1,6 +1,7 @@
 import React, { FunctionComponent, ReactNode } from "react";
 import { Link } from "gatsby";
 import styled from "@emotion/styled";
+import { MAIN_WIDTH } from "utils/variables";
 
 interface ICategoryListProps {
   selectedCategory: string;
@@ -12,7 +13,7 @@ interface ICategoryListProps {
 const CategoryListWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 48rem;
+  width: ${MAIN_WIDTH};
   margin: 3rem auto 0;
   gap: 1rem;
 

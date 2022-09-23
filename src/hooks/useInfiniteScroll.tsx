@@ -1,6 +1,6 @@
 import { MutableRefObject, useRef, useMemo, useState, useEffect } from "react";
 import { IPostListProps } from "components/Main/PostList";
-import { CATEGORY_ALL } from "pages/index";
+import { CATEGORY_ALL } from "utils/variables";
 
 const ITEMS_PER_PAGE = 10;
 
