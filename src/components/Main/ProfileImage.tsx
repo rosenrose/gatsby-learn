@@ -15,16 +15,6 @@ const ProfileImageWrapper = styled(GatsbyImage)`
   }
 `;
 
-export const getProfileImage = graphql`
-  query getProfileImage {
-    file(name: { eq: "profile_image" }) {
-      childImageSharp {
-        gatsbyImageData(width: 120, height: 120)
-      }
-    }
-  }
-`;
-
 export interface IProfileImageProps {
   profileImage: IGatsbyImageData;
 }
