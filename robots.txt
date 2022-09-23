@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://rosenrose.github.io/gatsby-learn/sitemap/sitemap-index.xml
+Host: https://rosenrose.github.io
