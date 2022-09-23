@@ -19,6 +19,11 @@ const PostHeadInfoWrapper = styled.div`
   margin: 0 auto;
   padding: 4rem 0;
   color: #fff;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 2.5rem 1.2rem;
+  }
 `;
 
 const PrevIcon = styled(Link)`
@@ -31,6 +36,12 @@ const PrevIcon = styled(Link)`
   color: #000;
   font-size: 1.3rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 768px) {
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.1rem;
+  }
 `;
 
 const Title = styled.h1`
@@ -42,6 +53,10 @@ const Title = styled.h1`
   -webkit-line-clamp: 2;
   font-size: 3rem;
   font-weight: 800;
+
+  @media (max-width: 768px) {
+    font-size: 2.5rem;
+  }
 `;
 
 const PostData = styled.div`
@@ -51,6 +66,14 @@ const PostData = styled.div`
   margin-top: 1rem;
   font-size: 1.2rem;
   font-weight: 700;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1rem;
+    font-weight: 400;
+    gap: 0.5rem;
+  }
 `;
 
 const PostHeadInfo: FunctionComponent<IPostHeadInfoProps> = ({ title, date, categories }) => {

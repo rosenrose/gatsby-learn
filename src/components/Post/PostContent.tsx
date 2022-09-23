@@ -73,6 +73,27 @@ const MarkdownRenderer = styled.div`
   pre[class*="language-"] {
     tab-size: 2;
   }
+
+  @media (max-width: 768px) {
+    width: 100%;
+    padding: 5rem 1.2rem;
+    line-height: 1.6;
+    font-size: 0.8rem;
+
+    h1 {
+      font-size: 1.4rem;
+    }
+    h2 {
+      font-size: 1.2rem;
+    }
+    h3 {
+      font-size: 1.1rem;
+    }
+
+    img {
+      width: 100%;
+    }
+  }
 `;
 
 const PostContent: FunctionComponent<{ html: string }> = ({ html }) => {

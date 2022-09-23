@@ -3,12 +3,16 @@ import styled from "@emotion/styled";
 import { GatsbyImage, IGatsbyImageData } from "gatsby-plugin-image";
 import PostHeadInfo from "components/Post/PostHeadInfo";
 import { IFrontmatter } from "components/Main/PostItem";
-import { HEADER_HEIGHT } from "utils/variables";
+import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from "utils/variables";
 
 const PostHeadWrapper = styled.div`
   position: relative;
   width: 100%;
   height: ${HEADER_HEIGHT};
+
+  @media (max-width: 768px) {
+    height: ${HEADER_HEIGHT_MOBILE};
+  }
 `;
 
 interface IGatsbyImgProps {
@@ -26,6 +30,10 @@ const BackgroundImage = styled((props: IGatsbyImgProps) => (
   height: ${HEADER_HEIGHT};
   object-fit: cover;
   filter: brightness(0.25);
+
+  @media (max-width: 768px) {
+    height: ${HEADER_HEIGHT_MOBILE};
+  }
 `;
 
 const PostHead: FunctionComponent<IFrontmatter> = ({
