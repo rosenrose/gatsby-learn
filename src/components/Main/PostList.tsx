@@ -10,7 +10,7 @@ const PostListWrapper = styled.div`
   grid-gap: 1.2rem;
   width: ${MAIN_WIDTH};
   margin: 0 auto;
-  padding: 3rem 0 6rem;
+  padding: 3rem 0.2rem 6rem;
   background-color: #7bb3c2;
 
   @media (max-width: 768px) {
