@@ -14,7 +14,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "typecheck": "tsc --noEmit",
-    "predeploy": "npm run build",
+    "predeploy": "gatsby build --prefix-paths",
     "deploy": "gh-pages -d public"
   },
   "dependencies": {
