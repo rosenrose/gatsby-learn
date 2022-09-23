@@ -21,6 +21,7 @@ export const queryMarkdownBySlug = graphql`
               childImageSharp {
                 gatsbyImageData
               }
+              publicURL
             }
           }
         }
@@ -35,20 +36,27 @@ interface IPostTemplateProps {
       edges: IPost[];
     };
   };
+  location: {
+    href: string;
+  };
 }
 
 const PostTemplate: FunctionComponent<IPostTemplateProps> = ({
   data: {
     allMarkdownRemark: { edges },
   },
+  location: { href },
 }) => {
   const {
-    node: { html, frontmatter },
+    node: {
+      html,
+      frontmatter: { title, summary, date, categories, thumbnail },
+    },
   } = edges[0];
 
   return (
-    <Template>
-      <PostHead {...frontmatter} />
+    <Template {...{ title, description: summary!, url: href, image: thumbnail.publicURL! }}>
+      <PostHead {...{ title, date, categories, thumbnail }} />
       <PostContent html={html!} />
       <CommentWidget />
     </Template>

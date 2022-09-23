@@ -81,12 +81,13 @@ export interface IPost {
 export interface IFrontmatter {
   categories: string[];
   date: string;
-  summary: string;
+  summary?: string;
   title: string;
   thumbnail: {
     childImageSharp: {
       gatsbyImageData: IGatsbyImageData;
     };
+    publicURL?: string;
   };
 }
 

@@ -13,7 +13,9 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d public"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -21,17 +23,22 @@
     "@fortawesome/fontawesome-svg-core": "^6.2.0",
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@types/react-helmet": "^6.1.5",
     "gatsby": "^4.23.0",
+    "gatsby-plugin-canonical-urls": "^4.23.0",
     "gatsby-plugin-emotion": "^7.23.0",
     "gatsby-plugin-image": "^2.23.0",
     "gatsby-plugin-mdx": "^4.2.0",
+    "gatsby-plugin-robots-txt": "^1.7.1",
     "gatsby-plugin-sharp": "^4.23.0",
     "gatsby-plugin-sitemap": "^5.23.0",
     "gatsby-source-filesystem": "^4.23.0",
     "gatsby-transformer-remark": "^5.23.0",
     "gatsby-transformer-sharp": "^4.23.0",
+    "gh-pages": "^4.0.0",
     "react": "^18.1.0",
-    "react-dom": "^18.1.0"
+    "react-dom": "^18.1.0",
+    "react-helmet": "^6.1.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.45",

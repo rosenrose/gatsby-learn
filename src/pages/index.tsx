@@ -18,6 +18,14 @@ interface IIndexPagePros {
       childImageSharp: {
         gatsbyImageData: IGatsbyImageData;
       };
+      publicURL: string;
+    };
+    site: {
+      siteMetadata: {
+        title: string;
+        description: string;
+        siteUrl: string;
+      };
     };
   };
   location: {
@@ -52,6 +60,14 @@ export const getPostList = graphql`
       childImageSharp {
         gatsbyImageData(width: 120, height: 120)
       }
+      publicURL
+    }
+    site {
+      siteMetadata {
+        title
+        description
+        siteUrl
+      }
     }
   }
 `;
@@ -61,6 +77,10 @@ const IndexPage: FunctionComponent<IIndexPagePros> = ({
     allMarkdownRemark: { edges },
     file: {
       childImageSharp: { gatsbyImageData },
+      publicURL,
+    },
+    site: {
+      siteMetadata: { title, description, siteUrl },
     },
   },
   location: { search },
@@ -100,7 +120,7 @@ const IndexPage: FunctionComponent<IIndexPagePros> = ({
   }
 
   return (
-    <Template>
+    <Template {...{ title, description, url: siteUrl, image: publicURL }}>
       <Introduction profileImage={gatsbyImageData} />
       <CategoryList selectedCategory={selectedCategory} categoryList={categoryList} />
       <PostList selectedCategory={selectedCategory} posts={edges} />

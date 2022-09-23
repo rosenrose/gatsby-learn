@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import styled from "@emotion/styled";
 import { MAIN_WIDTH } from "utils/variables";
 
-const MarkdownRenderer = styled.div`
+const MarkdownRenderer = styled.article`
   display: flex;
   flex-direction: column;
   width: ${MAIN_WIDTH};

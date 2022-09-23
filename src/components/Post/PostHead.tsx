@@ -5,7 +5,7 @@ import PostHeadInfo from "components/Post/PostHeadInfo";
 import { IFrontmatter } from "components/Main/PostItem";
 import { HEADER_HEIGHT, HEADER_HEIGHT_MOBILE } from "utils/variables";
 
-const PostHeadWrapper = styled.div`
+const PostHeadWrapper = styled.header`
   position: relative;
   width: 100%;
   height: ${HEADER_HEIGHT};

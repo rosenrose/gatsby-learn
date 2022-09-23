@@ -4,7 +4,7 @@ import ProfileImage, { IProfileImageProps } from "components/Main/ProfileImage";
 import { MAIN_WIDTH } from "utils/variables";
 import { HEADER_HEIGHT } from "utils/variables";
 
-const Background = styled.div`
+const Background = styled.header`
   width: 100%;
   background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
   color: #fff;

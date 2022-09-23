@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from "react";
-import { Link } from "gatsby";
 import styled from "@emotion/styled";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
@@ -26,7 +25,7 @@ const PostHeadInfoWrapper = styled.div`
   }
 `;
 
-const PrevIcon = styled(Link)`
+const PrevIcon = styled.div`
   display: grid;
   place-items: center;
   width: 2.5rem;
@@ -79,7 +78,7 @@ const PostData = styled.div`
 const PostHeadInfo: FunctionComponent<IPostHeadInfoProps> = ({ title, date, categories }) => {
   return (
     <PostHeadInfoWrapper>
-      <PrevIcon to="/">
+      <PrevIcon onClick={() => window.history.back()}>
         <FontAwesomeIcon icon={faArrowLeft} />
       </PrevIcon>
       <Title>{title}</Title>
